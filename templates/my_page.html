@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
 
     <!-- Webpage Title -->
     <title>Hello, world!</title>
@@ -10,14 +10,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-		<!-- JS -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
     <style>
         .collapse-content .fa.fa-heart:hover {
@@ -27,20 +32,143 @@
         .collapse-content .fa.fa-share-alt:hover {
             color: #0d47a1 !important;
         }
-    </style>
-  </head>
-  <body>
 
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        .purple-border textarea {
+            border: 1px solid #b3b3b3;
+        }
+
+
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+            showPoem();
+        });
+
+        //시 입력하기
+        function insertPoem() {
+            $.ajax({
+                type: "POST",
+                url: "/api/myPage",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {poemTitle_give: $('#poemTitle').val(), poem_give: $('#poem').val(), poem_one_give: $('#customCheck').val()},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('시 작성이 저장되었습니다')
+                        window.location.href = '/myPage'
+                    } else {
+                        alert("다시 입력해주세요")
+                    }
+                }
+            })
+        }
+
+        //쓴 시 보여주기
+        function showPoem() {
+            $.ajax({
+                type: "GET",
+                url: "/api/myPage",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {},
+                success: function (response) {
+                    let poems = response['poems'];
+                    for (let i = 0; i < poems.length; i++) {
+                        makeCard(poems[i]['poemTitle'], poems[i]['poemTitle'], '20200501');
+                    }
+                }
+            })
+        }
+
+
+        //쓴 시들 리스트로 합치기
+        function makeCard(title, content, date) {
+            let tempHtml = `<tr>
+                            <th scope="row">1</th>
+                            <td>${title}</td>
+                            <td>${content}</td>
+                            <td>${date}</td>
+                        </tr>`;
+            console.log(tempHtml)
+            $("#list").append(tempHtml);
+        }
+
+        //시 작성 열고 닫기
+        function openClose() {
+            // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
+            if ($("#poemInsert").css("display") == "block") {
+                // post-box를 가리고
+                $("#poemInsert").hide();
+                // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
+                $("#btn-poem").text("포스팅 박스 열기");
+            } else {
+                // 아니면(눈에 보이지 않으면) post-box를 펴라
+                $("#poemInsert").show();
+                // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
+                $("#btn-poem").text("포스팅 박스 닫기");
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+
+<!--홈페이지 메뉴-->
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="#">Company name이란</a>
-      <a class="p-2 text-dark" href="#">오늘의 시</a>
-      <a class="p-2 text-dark" href="#">편지함</a>
-      <a class="p-2 text-dark" href="#">나의 정보</a>
+        <a class="p-2 text-dark" href="#">Company name이란</a>
+        <a class="p-2 text-dark" href="#">오늘의 시</a>
+        <a class="p-2 text-dark" href="#">편지함</a>
+        <a class="p-2 text-dark" href="/myPage">나의 정보</a>
     </nav>
-    <a class="btn btn-outline-primary" href="#">가입하기</a>
-  </div>
+    <a class="btn btn-outline-primary" href="/login">가입하기</a>
+</div>
 
-  </body>
+<!--시 리스트 목록-->
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">시 제목</th>
+        <th scope="col">시 내용</th>
+        <th scope="col">날짜</th>
+    </tr>
+    </thead>
+    <tbody id="list">
+
+    </tbody>
+</table>
+
+<!--시 작성 버튼-->
+<button type="button" class="btn btn-info" id="btn-poem" onclick="openClose()">시 작성하기</button>
+
+
+<!--시 제목 쓰는 부분-->
+<div id="poemInsert" style="display:none;">
+    <div class="form-group purple-border">
+    <label for="poemTitle">제목</label>
+    <textarea class="form-control rounded-0" id="poemTitle" rows="1" placeholder="제목을 작성해주세요"></textarea>
+    </div>
+
+<!--시 쓰는 부분-->
+    <div class="form-group purple-border">
+    <label for="poem">내용</label>
+    <textarea class="form-control rounded-0" id="poem" rows="10" placeholder="시를 작성해주세요"></textarea>
+    </div>
+
+
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" value="Y" id="customCheck" name="example1">
+        <label class="custom-control-label" for="customCheck">대표 시로 설정하기</label>
+    </div>
+    <br>
+
+<!--시 저장 버튼-->
+    <button type="button" class="btn btn-info" onclick="insertPoem()"> 저장하기</button>
+
+</div>
+
+</body>
 </html>
