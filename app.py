@@ -59,27 +59,6 @@ def api_register():
 
    return jsonify({'result': 'success'})
 
-# 시 저장하기
-@app.route('/api/myPage', methods=['POST'])
-def api_myPage():
-   poemTitle_receive = request.form['poemTitle_give']
-   poem_receive = request.form['poem_give']
-   token_receive = request.headers['token_give']
-   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-
-   db.poem.insert_one({'poemTitle':poemTitle_receive,'poem':poem_receive, 'id':userinfo['id']})
-
-   return jsonify({'result': 'success'})
-
-@app.route('/api/myPage', methods=['GET'])
-def api_get_myPage():
-   token_receive = request.headers['token_give']
-   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-   poems = list(db.poem.find({'id':payload['id']},{'_id':0}))
-
-   return jsonify({'result': 'success', 'poems': poems})
 
 # [로그인 API]
 # id, pw를 받아서 맞춰보고, 토큰을 만들어 발급합니다.
@@ -125,6 +104,32 @@ def api_valid():
    except jwt.ExpiredSignatureError:
       # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
       return jsonify({'result': 'fail', 'msg':'로그인 시간이 만료되었습니다.'})
+
+# 시 저장하기
+@app.route('/api/myPage', methods=['POST'])
+def api_myPage():
+   poemTitle_receive = request.form['poemTitle_give']
+   poem_receive = request.form['poem_give']
+   poem_one_receive = request.form['poem_one_give']
+   token_receive = request.headers['token_give']
+   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+
+   db.poem.insert_one({'poemTitle':poemTitle_receive,'poem':poem_receive, 'poemOne':poem_one_receive, 'id':userinfo['id']})
+
+   return jsonify({'result': 'success'})
+
+# 시 불러오기
+@app.route('/api/myPage', methods=['GET'])
+def api_get_myPage():
+   token_receive = request.headers['token_give']
+   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+   poems = list(db.poem.find({'id':payload['id']},{'_id':0}))
+
+   return jsonify({'result': 'success', 'poems': poems})
+
+
 
 if __name__ == '__main__':
    app.run('0.0.0.0',port=5000,debug=True)
