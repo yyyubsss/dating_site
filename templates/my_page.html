@@ -80,6 +80,40 @@
             })
         }
 
+        //대표 시 외의 시들 N값으로 없데이트
+        //  function insertOnePoem() {
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "/api/myPage",
+        //         headers: {'token_give': $.cookie('mytoken')},
+        //         data: {poem_one_give: $('#customCheck').val()},
+        //         success: function (response) {
+        //
+        //             //여기를 어떻게 채워야 할지 모르겠어요...
+        //             }
+        //         }
+        //     })
+        // }
+
+
+         //수정하기 버튼 누르면 수정하는 기능
+         function updatePoem() {
+            $.ajax({
+                type: "POST",
+                url: "/api/myPage",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {poemTitle_give: $('#poemTitle').val(), poem_give: $('#poem').val(), poem_one_give: $('#customCheck').val()},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('수정되었습니다')
+                        window.location.href = '/myPage'
+                    } else {
+                        alert("다시 입력해주세요")
+                    }
+                }
+            })
+        }
+
 
         //쓴 시들 리스트로 합치기
         function makeCard(title, content, date) {
@@ -88,6 +122,10 @@
                             <td>${title}</td>
                             <td>${content}</td>
                             <td>${date}</td>
+                            <td>
+
+                                <button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" onclick="openClose()">수정하기</button>
+                            </td>
                         </tr>`;
             console.log(tempHtml)
             $("#list").append(tempHtml);
@@ -100,12 +138,12 @@
                 // post-box를 가리고
                 $("#poemInsert").hide();
                 // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
-                $("#btn-poem").text("포스팅 박스 열기");
+                $("#btn-poem").text("수정하기");
             } else {
                 // 아니면(눈에 보이지 않으면) post-box를 펴라
                 $("#poemInsert").show();
                 // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
-                $("#btn-poem").text("포스팅 박스 닫기");
+                $("#btn-poem").text("닫기");
             }
         }
 
@@ -134,6 +172,7 @@
         <th scope="col">시 제목</th>
         <th scope="col">시 내용</th>
         <th scope="col">날짜</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody id="list">
@@ -142,7 +181,7 @@
 </table>
 
 <!--시 작성 버튼-->
-<button type="button" class="btn btn-info" id="btn-poem" onclick="openClose()">시 작성하기</button>
+<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" id="btn-poem" onclick="openClose()">시 작성하기</button>
 
 
 <!--시 제목 쓰는 부분-->
@@ -166,7 +205,7 @@
     <br>
 
 <!--시 저장 버튼-->
-    <button type="button" class="btn btn-info" onclick="insertPoem()"> 저장하기</button>
+    <button type="button"class="btn btn-outline-primary btn-sm m-0 waves-effect" onclick="insertPoem()"> 저장하기</button>
 
 </div>
 
