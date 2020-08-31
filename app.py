@@ -129,6 +129,19 @@ def api_get_myPage():
 
    return jsonify({'result': 'success', 'poems': poems})
 
+# 시 수정/업데이트하기
+@app.route('/api/myPage', methods=['POST'])
+def api_update_myPage():
+   poemTitle_receive = request.form['poemTitle_give']
+   poem_receive = request.form['poem_give']
+   poem_one_receive = request.form['poem_one_give']
+   token_receive = request.headers['token_give']
+   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+
+   db.poem.update_one({'poemTitle':poemTitle_receive,'poem':poem_receive, 'poemOne':poem_one_receive, 'id':userinfo['id']})
+
+   return jsonify({'result': 'success'})
 
 
 if __name__ == '__main__':
