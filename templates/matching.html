@@ -138,46 +138,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
-      // 간단한 회원가입 함수입니다.
-      // 아이디, 비밀번호, 닉네임을 받아 DB에 저장합니다.
-      function register(){
-        $.ajax({
-          type: "POST",
-          url: "/api/register",
-          data: { id_give:$('#userid').val(), pw_give:$('#userpw').val(), nickname_give:$('#usernickname').val(), sex_give:$('#usersex').val(), age_give:$('#userage').val() },
-          success: function(response){
-            if (response['result'] == 'success'){
-              alert('회원가입이 완료되었습니다.')
-              window.location.href='/login'
-            } else{
-              alert(response['msg'])
-            }
-          }
-        })
-      }
+      function getPoem(title){
+            $.ajax({
+                type: "GET",
+                url: "/api/matching",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {poemTitle_give: title},
+                success: function (response) {
+                    $('#poemTitle').val(response.poem.poemTitle)
+                    $('#poem').val(response.poem.poem)
+                    if(response.poem.poemOne == 'Y'){
+                         $("input:checkbox[id='customCheck']").prop("checked", true);
+                    }
 
-
-      //비밀번호 일치 확인
-      $(function password_check(){
-          $("#alert-success").hide();
-          $("#alert-danger").hide();
-          $("input").keyup (function(){
-              var userpw=$("#userpw").val();
-              var reuserpw=$("#reuserpw").val();
-              if(userpw != "" || reuserpw != ""){
-                  if(userpw == reuserpw){
-                      $("#alert-success").show();
-                      $("#alert-danger").hide();
-                      $("#register").removeAttr("disabled");
-                  }else{
-                      $("#alert-success").hide();
-                      $("#alert-danger").show();
-                      $("#register").attr("disabled", "disabled");
-                  }
-              }
-          });
-              });
-
+                }
+            })
+        }
 
 
     </script>
@@ -196,37 +172,7 @@
     <a class="btn btn-outline-primary" href="/login">가입하기</a>
   </div>
 
-  <div>
-      <div class="form">
-        <label for="userid">아이디</label>
-<!--    <input type="text" class="form-input" id="userid" aria-describedby="emailHelp" placeholder="아이디를 입력해주세요">-->
-        <input type="text" class="form_input" id="userid" placeholder="아이디를 입력해주세요" check_result="fail" required/>
-        <button type="button" class="id_overlap_button" onclick="id_overlap_check()">중복검사</button>
-        <img id="id_check_sucess" style="display: none;">
 
-
-        <label for="userpw">비밀번호</label>
-        <input type="password" class="form-input" id="userpw" placeholder="비밀번호를 입력해주세요">
-        <label for="userpw">비밀번호 재확인</label>
-        <input type="password" class="form-input" id="reuserpw" placeholder="비밀번호를 다시 입력해주세요">
-
-        <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다</div>
-        <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다</div>
-
-        <label for="usernickname">닉네임</label>
-        <input type="text" class="form-input" id="usernickname" placeholder="닉네임을 입력해주세요">
-
-        <label for="usersex">성별</label>
-        <input type="text" class="form-input" id="usersex" placeholder="여성 / 남성">
-
-
-        <label for="userage">나이</label>
-        <input type="text" class="form-input" id="userage" placeholder="나이를 입력해주세요">
-
-        <button class="form button" id="register" onclick="register()">회원가입</button>
-    </div>
-
-    </div>
 
     <!--이쁜거-->
 

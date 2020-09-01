@@ -42,6 +42,11 @@ def myPage():
 def messenger():
    return render_template('messenger.html')
 
+@app.route('/matching')
+def messenger():
+   return render_template('matching.html')
+
+
 
 #################################
 ##  로그인을 위한 API            ##
