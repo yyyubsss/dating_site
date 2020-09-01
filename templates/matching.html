@@ -138,22 +138,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
-      function getPoem(title){
+ //쓴 시 보여주기
+        function matchingPoem() {
             $.ajax({
                 type: "GET",
-                url: "/api/matching",
+                url: "/api/myPage",
                 headers: {'token_give': $.cookie('mytoken')},
-                data: {poemTitle_give: title},
+                data: {},
                 success: function (response) {
-                    $('#poemTitle').val(response.poem.poemTitle)
-                    $('#poem').val(response.poem.poem)
-                    if(response.poem.poemOne == 'Y'){
-                         $("input:checkbox[id='customCheck']").prop("checked", true);
-                    }
-
+                    let poems = response['poems'];
+                    for (let i = 0; i < poems.length; i++);
                 }
             })
         }
+
+
+
 
 
     </script>
@@ -165,7 +165,7 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="#">Company name이란</a>
-      <a class="p-2 text-dark" href="#">오늘의 시</a>
+      <a class="p-2 text-dark" href="/matching">오늘의 시</a>
       <a class="p-2 text-dark" href="/messenger">편지함</a>
       <a class="p-2 text-dark" href="/myPage">나의 정보</a>
     </nav>

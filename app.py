@@ -43,7 +43,7 @@ def messenger():
    return render_template('messenger.html')
 
 @app.route('/matching')
-def messenger():
+def matching():
    return render_template('matching.html')
 
 
