@@ -139,18 +139,18 @@
 
     <script>
  //쓴 시 보여주기
-        function matchingPoem() {
-            $.ajax({
-                type: "GET",
-                url: "/api/myPage",
-                headers: {'token_give': $.cookie('mytoken')},
-                data: {},
-                success: function (response) {
-                    let poems = response['poems'];
-                    for (let i = 0; i < poems.length; i++);
-                }
-            })
-        }
+ //        function matchingPoem() {
+ //            $.ajax({
+ //                type: "GET",
+ //                url: "/api/myPage",
+ //                headers: {'token_give': $.cookie('mytoken')},
+ //                data: {},
+ //                success: function (response) {
+ //                    let poems = response['poems'];
+ //                    for (let i = 0; i < poems.length; i++);
+ //                }
+ //            })
+ //        }
 
 
 
