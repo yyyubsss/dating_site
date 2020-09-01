@@ -38,6 +38,11 @@ def register():
 def myPage():
    return render_template('my_page.html')
 
+@app.route('/messenger')
+def messenger():
+   return render_template('messenger.html')
+
+
 #################################
 ##  로그인을 위한 API            ##
 #################################
@@ -115,33 +120,49 @@ def api_myPage():
    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
    userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
 
+   if poem_one_receive == 'Y':
+      db.poem.update_many({}, {'$set': {'poemOne': 'N'}})
+
    db.poem.insert_one({'poemTitle':poemTitle_receive,'poem':poem_receive, 'poemOne':poem_one_receive, 'id':userinfo['id']})
 
    return jsonify({'result': 'success'})
 
-# 시 불러오기
+# 시 불러오기(여러개)
 @app.route('/api/myPage', methods=['GET'])
 def api_get_myPage():
-   token_receive = request.headers['token_give']
-   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-   poems = list(db.poem.find({'id':payload['id']},{'_id':0}))
+    token_receive = request.headers['token_give']
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+    poems = list(db.poem.find({'id': payload['id']}, {'_id': 0}))
 
-   return jsonify({'result': 'success', 'poems': poems})
+    return jsonify({'result': 'success', 'poems': poems})
+
+# 시 불러오기(하나)
+@app.route('/api/myPoem', methods=['GET'])
+def api_get_myPoem():
+    token_receive = request.headers['token_give']
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+    poemTitle_receive = request.args.get('poemTitle_give')
+    poem = db.poem.find_one({'id': payload['id'], 'poemTitle':poemTitle_receive}, {'_id': 0})
+
+    return jsonify({'result': 'success', 'poem': poem})
+
 
 # 시 수정/업데이트하기
-@app.route('/api/myPage', methods=['POST'])
+@app.route('/api/myPoem', methods=['POST'])
 def api_update_myPage():
-   poemTitle_receive = request.form['poemTitle_give']
-   poem_receive = request.form['poem_give']
-   poem_one_receive = request.form['poem_one_give']
-   token_receive = request.headers['token_give']
-   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+    poemTitle_receive = request.form['poemTitle_give']
+    poem_receive = request.form['poem_give']
+    poem_one_receive = request.form['poem_one_give']
 
-   db.poem.update_one({'poemTitle':poemTitle_receive,'poem':poem_receive, 'poemOne':poem_one_receive, 'id':userinfo['id']})
+    if poem_one_receive == 'Y':
+        db.poem.update_many({}, {'$set': {'poemOne': 'N'}})
 
-   return jsonify({'result': 'success'})
+    db.poem.update_one({'poemTitle': poemTitle_receive},
+                       {'$set': {'title': poemTitle_receive, 'poem': poem_receive, 'poemOne': poem_one_receive}})
+
+    return jsonify({'result': 'success'})
 
 
 if __name__ == '__main__':
