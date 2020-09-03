@@ -169,6 +169,11 @@ def api_update_myPage():
 
     return jsonify({'result': 'success'})
 
+# 매칭 시 띄우기
+@app.route('/matching', methods=['GET'])
+def api_matching():
+    poems = list(db.poem.find({}, {'_id': 0}))
+    return jsonify({'result': 'success', 'poems': poems})
 
 if __name__ == '__main__':
    app.run('0.0.0.0',port=5000,debug=True)
