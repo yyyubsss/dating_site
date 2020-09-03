@@ -138,21 +138,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
- //쓴 시 보여주기
- //        function matchingPoem() {
- //            $.ajax({
- //                type: "GET",
- //                url: "/api/myPage",
- //                headers: {'token_give': $.cookie('mytoken')},
- //                data: {},
- //                success: function (response) {
- //                    let poems = response['poems'];
- //                    for (let i = 0; i < poems.length; i++);
- //                }
- //            })
- //        }
+      // 쓴 시 보여주기
+      function matchingPoem() {
+        $.ajax({
+          type: "GET",
+          url: "/api/matching",
+          data: {},
+          success: function (response) {
+                let poems = response["poems"];
+                for (let i = 0; i < poems.length; i++) {
+                makeCard(poems[i]['poemTitle'], poems[i]['poem']);
+              }
+            }
+            }
+          })
+      }
 
 
+      function makeCard(title, content) {
+        let tempHtml = `<tr>
+                                <td>${title}</td>
+                                <td>${content}</td>
+                        </tr>`;
+        $("#matchingPoems").append(tempHtml);
+      }
 
 
 
