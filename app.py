@@ -42,6 +42,14 @@ def myPage():
 def messenger():
    return render_template('messenger.html')
 
+@app.route('/messenger_receive')
+def messenger_receive():
+   return render_template('messenger_receive.html')
+
+@app.route('/messenger_send')
+def messenger_send():
+   return render_template('messenger_send.html')
+
 @app.route('/matching')
 def matching():
    return render_template('matching.html')
