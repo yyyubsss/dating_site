@@ -167,6 +167,13 @@
         })
       }
 
+      // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
+      function logout(){
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href='/login'
+      }
+
     </script>
 
   </head>
@@ -174,14 +181,25 @@
 
   <!--홈페이지 메뉴-->
   <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+    <h3 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="#">Company name이란</a>
+      <a class="p-2 text-dark" href="/introduction">Dear Poem이란</a>
       <a class="p-2 text-dark" href="/matching">오늘의 시</a>
       <a class="p-2 text-dark" href="/messenger">편지함</a>
-      <a class="p-2 text-dark" href="/myPage">나의 정보</a>
-    </nav>
-    <a class="btn btn-outline-primary" href="/login">가입하기</a>
+      <a class="p-2 text-dark" href="/myPage">나의 시</a>
+
+
+    <!--들어가기-->
+    <a class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">회원님</a>
+
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/login">로그인</a>
+      <a class="dropdown-item" href="/register">회원가입</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" onclick="logout()" href="/">로그아웃</a>
+    </div>
+
   </div>
 
   <!--이쁜거-->

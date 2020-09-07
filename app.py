@@ -46,6 +46,10 @@ def messenger():
 def matching():
    return render_template('matching.html')
 
+@app.route('/introduction')
+def introduction():
+   return render_template('introduction.html')
+
 
 
 #################################
@@ -170,7 +174,7 @@ def api_update_myPage():
     return jsonify({'result': 'success'})
 
 # 매칭 시 띄우기
-@app.route('/matching', methods=['GET'])
+@app.route('/api/matching', methods=['GET'])
 def api_matching():
     poems = list(db.poem.find({}, {'_id': 0}))
     return jsonify({'result': 'success', 'poems': poems})
