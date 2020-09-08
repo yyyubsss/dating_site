@@ -192,20 +192,30 @@
       }
 
       function makeCard(title, content) {
-        let tempHtml = `<tr>
-                                <td>${title}</td>
-                                <td>${content}</td>
-                        </tr>`;
+        let tempHtml = `<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title" >${title}</h5>
+          <p class="card-text">${content}</p>
+          <a href="#" class="btn btn-primary">편지 보내기</a>
+          </div>
+          </div>
+          </div>
+          </div>
+
+        `;
         $("#matchingPoems").append(tempHtml);
       }
 
 
       // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
-      function logout(){
+      function logout() {
         $.removeCookie('mytoken');
         alert('로그아웃!')
         window.location.href='/login'
       }
+
 
     </script>
   </head>
@@ -234,8 +244,9 @@
 
   </div>
 
-<div id="matchingPoems">
-  <div class="row">
+<!-- 시 보여주는 카드-->
+  <div id="matchingPoems" style="display: flex; justify-content: center;">
+    <div class="row" style="display: none;">
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
@@ -246,20 +257,9 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content
-            is a little longer.</p>
-          <a href="#" class="btn btn-primary">편지 보내기</a>
-        </div>
-      </div>
-    </div>
   </div>
+</div>
 
-<!--  <div id="matchingPoems">-->
-<!--  </div>-->
 
   </body>
 </html>

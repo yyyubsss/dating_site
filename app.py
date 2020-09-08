@@ -185,6 +185,7 @@ def api_update_myPage():
 @app.route('/api/matching', methods=['GET'])
 def api_matching():
     poems = list(db.poem.find({}, {'_id': 0}))
+    # choice_list = random.choice(list())
     return jsonify({'result': 'success', 'poems': poems})
 
 if __name__ == '__main__':
