@@ -188,7 +188,7 @@
                 type: "POST",
                 url: "/api/sending_message",
                 headers: {'token_give': $.cookie('mytoken')},
-                data: {message_give: $('#message').val()},
+                data: {message_give: $('#message').val(), recv_give: $('#recv').val()},
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert('편지가 전달되었습니다')
@@ -231,6 +231,7 @@
     <div class="form-group purple-border">
     <label for="message">편지</label>
     <textarea class="form-control rounded-0" id="message" rows="10" placeholder="편지 내용을 작성해주세요"></textarea>
+      <input type="text" id="recv" value="{{recv}}"/>
     </div>
 
 <!--편지 전송 버튼-->

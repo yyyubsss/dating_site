@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 app = Flask(__name__)
 
@@ -45,7 +47,8 @@ def messenger():
 
 @app.route('/sending_message')
 def sending_message():
-   return render_template('sending_message.html')
+    recv = request.args.get('recv')
+    return render_template('sending_message.html', recv=recv)
 
 @app.route('/messenger_receive')
 def messenger_receive():
@@ -189,20 +192,30 @@ def api_update_myPage():
 # 매칭 시 띄우기
 @app.route('/api/matching', methods=['GET'])
 def api_matching():
+    token_receive = request.headers['token_give']
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
     poems = list(db.poem.find({}, {'_id': 0}))
-    # choice_list = random.choice(list())
-    return jsonify({'result': 'success', 'poems': poems})
+    target_poems = []
+    for poem in poems:
+        poem_user = db.user.find_one({'id': poem['id']}, {'_id': 0})
+        if poem_user['sex'] != userinfo['sex'] and poem_user['age'][0] == userinfo['age'][0]:
+            target_poems.append(poem)
+    if len(target_poems) > 3:
+        target_poems = random.sample(target_poems, 3)
+    return jsonify({'result': 'success', 'poems': target_poems})
 
 # 편지 저장하기
 @app.route('/api/sending_message', methods=['POST'])
 def api_sending_message():
    message_receive = request.form['message_give']
+   recv_receive = request.form['recv_give']
    token_receive = request.headers['token_give']
    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
    userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
 
 
-   db.sending_message.insert_one({'message':message_receive, 'id':userinfo['id']})
+   db.sending_message.insert_one({'message':message_receive, 'id':userinfo['id'], 'recv':recv_receive})
 
    return jsonify({'result': 'success'})
 

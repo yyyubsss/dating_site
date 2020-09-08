@@ -181,33 +181,33 @@
         $.ajax({
           type: "GET",
           url: "/api/matching",
+          headers: { 'token_give' : $.cookie('mytoken') },
           data: {},
           success: function (response) {
                 let poems = response["poems"];
                 for (let i = 0; i < poems.length; i++) {
-                makeCard(poems[i]['poemTitle'], poems[i]['poem']);
+                makeCard(poems[i]['poemTitle'], poems[i]['poem'], poems[i]['id']);
               }
             }
           })
       }
-
-      function makeCard(title, content) {
+​
+      function makeCard(title, content, id) {
         let tempHtml = `<div class="row">
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title" >${title}</h5>
           <p class="card-text">${content}</p>
-          <a href="/sending_message" class="btn btn-primary">편지 보내기</a>
+          <a href="/sending_message?recv=${id}" class="btn btn-primary">편지 보내기</a>
           </div>
           </div>
           </div>
           </div>
-
+​
         `;
         $("#matchingPoems").append(tempHtml);
       }
-
 
       // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
       function logout() {
