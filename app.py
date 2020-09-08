@@ -225,13 +225,21 @@ def api_messenger_send():
     token_receive = request.headers['token_give']
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-    messages = list(db.sending_message.find({}, {'_id': 0}))
-    target_messages = []
-    for sending_message in messages:
-        message_user = db.user.find_one({'id': sending_message['id']}, {'_id': 0})
-        if message_user['id'] == userinfo['id']:
-            target_messages.append(sending_message)
-    return jsonify({'result': 'success', 'messages': target_messages})
+    messages = list(db.sending_message.find({'id': userinfo['id']}, {'_id': 0}))
+
+
+    return jsonify({'result': 'success', 'messages': messages})
+
+# 받은 편지 보여주기
+@app.route('/api/messenger_receive', methods=['GET'])
+def api_messenger_receive():
+    token_receive = request.headers['token_give']
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+    messages = list(db.sending_message.find({'recv': userinfo['id']}, {'_id': 0}))
+
+
+    return jsonify({'result': 'success', 'messages': messages})
 
 
 if __name__ == '__main__':

@@ -152,6 +152,7 @@
           } else {
             // 쿠기가 있으면, 유저 정보를 불러옵니다.
             load_user_info()
+            showReceiveMessage()
           }
       });
 
@@ -181,6 +182,40 @@
         alert('로그아웃!')
         window.location.href='/login'
       }
+      //받은 편지 보여주기
+        function showReceiveMessage() {
+            $.ajax({
+                type: "GET",
+                url: "/api/messenger_receive",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {},
+                success: function (response) {
+                    let messages = response['messages'];
+                    for (let i = 0; i < messages.length; i++) {
+                        makeCard(messages[i]['message'], messages[i]['id']);
+                    }
+                }
+            })
+        }
+
+        //보낸 편지 카드로 보여주기
+        function makeCard(content, id) {
+            let tempHtml = `
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                    <p class="card-text">${content}</p>
+                    <p class="card-text">${id}</p>
+                    <a href="/sending_message?recv=${id}" class="btn btn-primary">답장하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+            $("#receive_messages").append(tempHtml);
+        }
+
 
     </script>
   </head>
@@ -217,6 +252,23 @@
     </svg>
     <h2 style="font-size:25px; left: 180px; top: 110px; position: fixed">받은 편지함</h2>
   </div>
+
+  <!-- 받은 편지 보여주는 카드-->
+<div id="receive_messages" style="display: flex; justify-content: center;">
+    <div class="row" style="display: none;">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This
+                        content
+                        is a little longer.</p>
+                    <p class="card-text">보낸 사람</p>
+                  <a href="/sending_message?recv=${id}" class="btn btn-primary">편지 보내기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
   </body>
 </html>
