@@ -206,5 +206,12 @@ def api_sending_message():
 
    return jsonify({'result': 'success'})
 
+# 보낸 편지 보여주기
+@app.route('/api/messenger_send', methods=['GET'])
+def api_messenger_send():
+    messages = list(db.sending_message.find({}, {'_id': 0}))
+    return jsonify({'result': 'success', 'messages': messages})
+
+
 if __name__ == '__main__':
    app.run('0.0.0.0',port=5000,debug=True)

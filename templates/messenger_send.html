@@ -1,126 +1,126 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
 
-		<!-- Webpage Title -->
+    <!-- Webpage Title -->
     <title>Hello, world!</title>
 
-       <style>
-      @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-      .login-page {
-        width: 360px;
-        padding: 8% 0 0;
-        margin: auto;
-      }
+        .login-page {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+        }
 
-      .form {
-        position: relative;
-        z-index: 1;
-        background: #FFFFFF;
-        max-width: 500px;
-        margin: 70px auto;
-        padding: 45px;
-        text-align: center;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-      }
+        .form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            max-width: 500px;
+            margin: 70px auto;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
 
-      .form input {
-        font-family: "Roboto", sans-serif;
-        outline: 0;
-        background: #f2f2f2;
-        width: 100%;
-        border: 0;
-        margin: 0 0 15px;
-        padding: 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-      }
+        .form input {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
 
-      .form button {
-        font-family: "Roboto", sans-serif;
-        text-transform: uppercase;
-        outline: 0;
-        background: #4CAF50;
-        width: 100%;
-        border: 0;
-        padding: 15px;
-        color: #FFFFFF;
-        font-size: 14px;
-        -webkit-transition: all 0.3 ease;
-        transition: all 0.3 ease;
-        cursor: pointer;
-      }
+        .form button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #4CAF50;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
 
-      .form button:hover, .form button:active, .form button:focus {
-        background: #43A047;
-      }
+        .form button:hover, .form button:active, .form button:focus {
+            background: #43A047;
+        }
 
-      .form .message {
-        margin: 15px 0 0;
-        color: #b3b3b3;
-        font-size: 12px;
-      }
+        .form .message {
+            margin: 15px 0 0;
+            color: #b3b3b3;
+            font-size: 12px;
+        }
 
-      .form .message a {
-        color: #4CAF50;
-        text-decoration: none;
-      }
+        .form .message a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
 
-      .form .register-form {
-        display: none;
-      }
+        .form .register-form {
+            display: none;
+        }
 
-      .container {
-        position: relative;
-        z-index: 1;
-        max-width: 300px;
-        margin: 0 auto;
-      }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 300px;
+            margin: 0 auto;
+        }
 
-      .container:before, .container:after {
-        content: "";
-        display: block;
-        clear: both;
-      }
+        .container:before, .container:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
 
-      .container .info {
-        margin: 50px auto;
-        text-align: center;
-      }
+        .container .info {
+            margin: 50px auto;
+            text-align: center;
+        }
 
-      .container .info h1 {
-        margin: 0 0 15px;
-        padding: 0;
-        font-size: 36px;
-        font-weight: 300;
-        color: #1a1a1a;
-      }
+        .container .info h1 {
+            margin: 0 0 15px;
+            padding: 0;
+            font-size: 36px;
+            font-weight: 300;
+            color: #1a1a1a;
+        }
 
-      .container .info span {
-        color: #4d4d4d;
-        font-size: 12px;
-      }
+        .container .info span {
+            color: #4d4d4d;
+            font-size: 12px;
+        }
 
-      .container .info span a {
-        color: #000000;
-        text-decoration: none;
-      }
+        .container .info span a {
+            color: #000000;
+            text-decoration: none;
+        }
 
-      .container .info span .fa {
-        color: #EF3B3A;
-      }
+        .container .info span .fa {
+            color: #EF3B3A;
+        }
 
-      body {
-        background: #76b852; /* fallback for old browsers */
-        background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-        background: -moz-linear-gradient(right, #76b852, #8DC26F);
-        background: -o-linear-gradient(right, #76b852, #8DC26F);
-        background: linear-gradient(to left, #76b852, #8DC26F);
-        font-family: "Roboto", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+        body {
+            background: #76b852; /* fallback for old browsers */
+            background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+            background: -moz-linear-gradient(right, #76b852, #8DC26F);
+            background: -o-linear-gradient(right, #76b852, #8DC26F);
+            background: linear-gradient(to left, #76b852, #8DC26F);
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
     </style>
 
     <!-- Required meta tags -->
@@ -132,68 +132,106 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-		<!-- JS -->
+    <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
     <script>
 
-    // 로딩 후 바로 실행
-      $(document).ready(function(){
-          if ( $.cookie('mytoken') == undefined ) {
-            // mytoken이라는 값으로 쿠키가 없으면, 로그인 창으로 이동시킵니다.
-            alert('먼저 로그인을 해주세요')
-            window.location.href='/login'
-          } else {
-            // 쿠기가 있으면, 유저 정보를 불러옵니다.
-            load_user_info()
-          }
-      });
-
-            // 쿠키에 가지고 있는 token을 헤더에 담아서 보냅니다.
-      function load_user_info(){
-        $.ajax({
-          type: "GET",
-          url: "/api/nick",
-          headers: { 'token_give' : $.cookie('mytoken') },
-          data: {},
-          success: function(response){
-            if (response['result'] == 'success'){
-              // 올바른 결과값을 받으면 nickname을 입력해줍니다.
-              $('#nickname').text(response['nickname'])
-            } else{
-              // 에러가 나면 메시지를 띄우고 로그인 창으로 이동합니다.
-              alert(response['msg'])
-              window.location.href='/login'
+        // 로딩 후 바로 실행
+        $(document).ready(function () {
+            if ($.cookie('mytoken') == undefined) {
+                // mytoken이라는 값으로 쿠키가 없으면, 로그인 창으로 이동시킵니다.
+                alert('먼저 로그인을 해주세요')
+                window.location.href = '/login'
+            } else {
+                // 쿠기가 있으면, 유저 정보를 불러옵니다.
+                load_user_info()
             }
-          }
-        })
-      }
+        });
 
-      // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
-      function logout(){
-        $.removeCookie('mytoken');
-        alert('로그아웃!')
-        window.location.href='/login'
-      }
+        // 쿠키에 가지고 있는 token을 헤더에 담아서 보냅니다.
+        function load_user_info() {
+            $.ajax({
+                type: "GET",
+                url: "/api/nick",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        // 올바른 결과값을 받으면 nickname을 입력해줍니다.
+                        $('#nickname').text(response['nickname'])
+                    } else {
+                        // 에러가 나면 메시지를 띄우고 로그인 창으로 이동합니다.
+                        alert(response['msg'])
+                        window.location.href = '/login'
+                    }
+                }
+            })
+        }
+
+        // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
+        function logout() {
+            $.removeCookie('mytoken');
+            alert('로그아웃!')
+            window.location.href = '/login'
+        }
+
+
+        //보낸 편지 보여주기
+        function showSendingMessage() {
+            $.ajax({
+                type: "GET",
+                url: "/api/messenger_send",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {},
+                success: function (response) {
+                    let messages = response['messages'];
+                    for (let i = 0; i < messages.length; i++) {
+                        makeCard(messages[i]['sending_message']);
+                    }
+                }
+            })
+        }
+
+        //보낸 편지 카드로 보여주기
+        function makeCard(content) {
+            let tempHtml = `
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                    <p class="card-text">${content}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+            $("#sending_messages").append(tempHtml);
+        }
 
     </script>
-  </head>
-  <body>
+</head>
+<body>
 
-  <!--홈페이지 메뉴-->
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+<!--홈페이지 메뉴-->
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h3 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="/introduction">Dear Poem이란</a>
-      <a class="p-2 text-dark" href="/matching">오늘의 시</a>
-      <a class="p-2 text-dark" href="/messenger">편지함</a>
-      <a class="p-2 text-dark" href="/myPage">나의 시</a>
+        <a class="p-2 text-dark" href="/introduction">Dear Poem이란</a>
+        <a class="p-2 text-dark" href="/matching">오늘의 시</a>
+        <a class="p-2 text-dark" href="/messenger">편지함</a>
+        <a class="p-2 text-dark" href="/myPage">나의 시</a>
     </nav>
 
     <!--들어가기-->
@@ -201,23 +239,39 @@
        aria-expanded="false">회원님</a>
 
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="/login">로그인</a>
-      <a class="dropdown-item" href="/register">회원가입</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" onclick="logout()" href="/">로그아웃</a>
+        <a class="dropdown-item" href="/login">로그인</a>
+        <a class="dropdown-item" href="/register">회원가입</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" onclick="logout()" href="/">로그아웃</a>
     </div>
-  </div>
+</div>
 
 
-  <!--보낸 편지함-->
-  <div>
-    <svg style="font-size:80px; left: 80px; top: 90px; position: fixed"" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-open" fill="currentColor"
-         xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd"
-            d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z"/>
+<!--보낸 편지함-->
+<div>
+    <svg style="font-size:80px; left: 80px; top: 90px; position: fixed"
+    " width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-open" fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd"
+          d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z"/>
     </svg>
     <h2 style="font-size:25px; left: 180px; top: 110px; position: fixed">보낸 편지함</h2>
-  </div>
+</div>
 
-  </body>
+<!-- 쓴 편지 보여주는 카드-->
+<div id="sending_messages" style="display: flex; justify-content: center;">
+    <div class="row" style="display: none;">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This
+                        content
+                        is a little longer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
