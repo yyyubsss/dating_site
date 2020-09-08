@@ -127,6 +127,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- envelope -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -139,7 +143,7 @@
 
     <script>
 
-      // 로딩 후 바로 실행
+    // 로딩 후 바로 실행
       $(document).ready(function(){
           if ( $.cookie('mytoken') == undefined ) {
             // mytoken이라는 값으로 쿠키가 없으면, 로그인 창으로 이동시킵니다.
@@ -171,50 +175,30 @@
         })
       }
 
-      // 쓴 시 보여주기
-
-      $(document).ready(function(){
-        matchingPoem()
-      })
-
-      function matchingPoem() {
-        $.ajax({
-          type: "GET",
-          url: "/api/matching",
-          data: {},
-          success: function (response) {
-                let poems = response["poems"];
-                for (let i = 0; i < poems.length; i++) {
-                makeCard(poems[i]['poemTitle'], poems[i]['poem']);
-              }
-            }
-          })
-      }
-
-      function makeCard(title, content) {
-        let tempHtml = `<div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title" >${title}</h5>
-          <p class="card-text">${content}</p>
-          <a href="/sending_message" class="btn btn-primary">편지 보내기</a>
-          </div>
-          </div>
-          </div>
-          </div>
-
-        `;
-        $("#matchingPoems").append(tempHtml);
-      }
-
-
       // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
-      function logout() {
+      function logout(){
         $.removeCookie('mytoken');
         alert('로그아웃!')
         window.location.href='/login'
       }
+
+       //편지 입력하기
+        function insertMessage() {
+            $.ajax({
+                type: "POST",
+                url: "/api/sending_message",
+                headers: {'token_give': $.cookie('mytoken')},
+                data: {message_give: $('#message').val()},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('편지가 전달되었습니다')
+                        window.location.href = '/sending_message'
+                    } else {
+                        alert("다시 입력해주세요")
+                    }
+                }
+            })
+        }
 
     </script>
   </head>
@@ -230,7 +214,7 @@
       <a class="p-2 text-dark" href="/myPage">나의 시</a>
     </nav>
 
-    <!--들억가기-->
+    <!--들어가기-->
     <a class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
        aria-expanded="false">회원님</a>
 
@@ -240,25 +224,16 @@
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" onclick="logout()" href="/">로그아웃</a>
     </div>
-
   </div>
 
-<!-- 시 보여주는 카드-->
-  <div id="matchingPoems" style="display: flex; justify-content: center;">
-    <div class="row" style="display: none;">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title" >Special title treatment</h5>
-          <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content
-            is a little longer.</p>
-          <a href="/sending_message" class="btn btn-primary">편지 보내기</a>
-        </div>
-      </div>
+
+<!--편지 쓰기-->
+    <div class="form-group purple-border">
+    <label for="message">편지</label>
+    <textarea class="form-control rounded-0" id="message" rows="10" placeholder="편지 내용을 작성해주세요"></textarea>
     </div>
-  </div>
-</div>
 
-
+<!--편지 전송 버튼-->
+  <button type="button"class="btn btn-outline-primary btn-sm m-0 waves-effect" onclick="insertMessage()">전달하기</button>
   </body>
 </html>

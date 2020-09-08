@@ -3,6 +3,7 @@ app = Flask(__name__)
 
 from pymongo import MongoClient
 client = MongoClient('mongodb://datingSite:datingSite@localhost',27017)
+client = MongoClient('localhost', 27017)
 db = client.date_siting
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
@@ -41,6 +42,10 @@ def myPage():
 @app.route('/messenger')
 def messenger():
    return render_template('messenger.html')
+
+@app.route('/sending_message')
+def sending_message():
+   return render_template('sending_message.html')
 
 @app.route('/messenger_receive')
 def messenger_receive():
@@ -187,6 +192,19 @@ def api_matching():
     poems = list(db.poem.find({}, {'_id': 0}))
     # choice_list = random.choice(list())
     return jsonify({'result': 'success', 'poems': poems})
+
+# 편지 저장하기
+@app.route('/api/sending_message', methods=['POST'])
+def api_sending_message():
+   message_receive = request.form['message_give']
+   token_receive = request.headers['token_give']
+   payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+   userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+
+
+   db.sending_message.insert_one({'message':message_receive, 'id':userinfo['id']})
+
+   return jsonify({'result': 'success'})
 
 if __name__ == '__main__':
    app.run('0.0.0.0',port=5000,debug=True)
