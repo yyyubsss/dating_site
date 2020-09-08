@@ -198,20 +198,21 @@
                 success: function (response) {
                     let messages = response['messages'];
                     for (let i = 0; i < messages.length; i++) {
-                        makeCard(messages[i]['sending_message']);
+                        makeCard(messages[i]['message'], messages[i]['recv']);
                     }
                 }
             })
         }
 
         //보낸 편지 카드로 보여주기
-        function makeCard(content) {
+        function makeCard(content, recv) {
             let tempHtml = `
         <div class="row">
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
                     <p class="card-text">${content}</p>
+                    <p class="card-text">${recv}</p>
                     </div>
                 </div>
             </div>
@@ -267,6 +268,7 @@
                     <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This
                         content
                         is a little longer.</p>
+                    <p class="card-text">받는 사람</p>
                 </div>
             </div>
         </div>

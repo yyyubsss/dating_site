@@ -192,7 +192,7 @@
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert('편지가 전달되었습니다')
-                        window.location.href = '/sending_message'
+                        window.location.href = '/messenger_send'
                     } else {
                         alert("다시 입력해주세요")
                     }
@@ -231,7 +231,7 @@
     <div class="form-group purple-border">
     <label for="message">편지</label>
     <textarea class="form-control rounded-0" id="message" rows="10" placeholder="편지 내용을 작성해주세요"></textarea>
-      <input type="text" id="recv" value="{{recv}}"/>
+      <input type="hidden" id="recv" value="{{recv}}"/>
     </div>
 
 <!--편지 전송 버튼-->
