@@ -112,15 +112,18 @@
       }
 
       body {
-        background: #76b852; /* fallback for old browsers */
-        background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-        background: -moz-linear-gradient(right, #76b852, #8DC26F);
-        background: -o-linear-gradient(right, #76b852, #8DC26F);
-        background: linear-gradient(to left, #76b852, #8DC26F);
+        background: #ffa07a; /* fallback for old browsers */
+        background: -webkit-linear-gradient(right, #ffa07a, #fafad2);
+        background: -moz-linear-gradient(right, #ffa07a, #fafad2);
+        background: -o-linear-gradient(right, #ffa07a, #fafad2);
+        background: linear-gradient(to left, #ffa07a, #fafad2);
         font-family: "Roboto", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+
+
+
     </style>
 
     <!-- Required meta tags -->
@@ -187,14 +190,15 @@
   <body>
 
   <!--홈페이지 메뉴-->
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h3 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 body shadow-sm">
+    <h3 class="my-0 mr-md-auto " style="font-size: 2.5rem; font-weight: 700;"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="/introduction">Dear Poem이란</a>
-      <a class="p-2 text-dark" href="/matching">오늘의 시</a>
-      <a class="p-2 text-dark" href="/messenger">편지함</a>
-      <a class="p-2 text-dark" href="/myPage">나의 시</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/introduction">Dear Poem이란</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/matching">오늘의 시</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/messenger">편지함</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/myPage">나의 시</a>
     </nav>
+
 
     <!--들어가기-->
     <a class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -211,7 +215,7 @@
 <!--받은 편지함-->
   <div>
     <h2 style="font-size:40px; left: 450px; top: 240px; position: fixed" >받은 편지함</h2>
-    <a href="/messenger_receive"><i class="fa fa-envelope" style="font-size:400px; float:left; margin-left: 19%; margin-top: 10%; margin-bottom: 10%;"></i></a>
+    <a href="/messenger_receive"><i class="fa fa-envelope" style="font-size:400px; float:left; margin-left: 19%; margin-top: 10%; margin-bottom: 10%; color: #1a1a1a;"></i></a>
 
 
   </div>
@@ -219,7 +223,7 @@
   <!--보낸 편지함-->
   <div>
     <h2 style="font-size:40px; left: 1250px; top: 240px; position: fixed" >보낸 편지함</h2>
-    <a href="/messenger_send"><i class="fa fa-envelope" style="font-size:400px; float:right; margin-right: 19%; margin-top: 10%; margin-bottom: 10%;" href="/messenger_send"></i></a>
+    <a href="/messenger_send"><i class="fa fa-envelope" style="font-size:400px; float:right; margin-right: 19%; margin-top: 10%; margin-bottom: 10%; color: #1a1a1a;" href="/messenger_send"></i></a>
 
   </div>
 

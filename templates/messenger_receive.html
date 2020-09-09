@@ -112,15 +112,32 @@
       }
 
       body {
-        background: #76b852; /* fallback for old browsers */
-        background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-        background: -moz-linear-gradient(right, #76b852, #8DC26F);
-        background: -o-linear-gradient(right, #76b852, #8DC26F);
-        background: linear-gradient(to left, #76b852, #8DC26F);
+        background: #ffa07a; /* fallback for old browsers */
+        background: -webkit-linear-gradient(right, #ffa07a, #fafad2);
+        background: -moz-linear-gradient(right, #ffa07a, #fafad2);
+        background: -o-linear-gradient(right, #ffa07a, #fafad2);
+        background: linear-gradient(to left, #ffa07a, #fafad2);
         font-family: "Roboto", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+
+      .card {
+          /* Add shadows to create the "card" effect */
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          transition: 0.3s;
+      }
+
+      /* On mouse-over, add a deeper shadow */
+      .card:hover {
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      /* Add some padding inside the card container */
+      .container {
+          padding: 2px 16px;
+      }
+
     </style>
 
     <!-- Required meta tags -->
@@ -222,14 +239,15 @@
   <body>
 
   <!--홈페이지 메뉴-->
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h3 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 body shadow-sm">
+    <h3 class="my-0 mr-md-auto " style="font-size: 2.5rem; font-weight: 700;"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="/introduction">Dear Poem이란</a>
-      <a class="p-2 text-dark" href="/matching">오늘의 시</a>
-      <a class="p-2 text-dark" href="/messenger">편지함</a>
-      <a class="p-2 text-dark" href="/myPage">나의 시</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/introduction">Dear Poem이란</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/matching">오늘의 시</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/messenger">편지함</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/myPage">나의 시</a>
     </nav>
+
 
     <!--들어가기-->
     <a class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -245,12 +263,12 @@
 
 <!--받은 편지함-->
   <div>
-    <svg style="font-size:80px; left: 80px; top: 90px; position: fixed"" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-open" fill="currentColor"
+    <svg style="font-size:80px; left: 110px; top: 420px; position: fixed" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-open" fill="currentColor"
          xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd"
             d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z"/>
     </svg>
-    <h2 style="font-size:25px; left: 180px; top: 110px; position: fixed">받은 편지함</h2>
+    <h2 style="font-size:23px; left: 91px; top: 530px; position: fixed">받은 편지함</h2>
   </div>
 
   <!-- 받은 편지 보여주는 카드-->

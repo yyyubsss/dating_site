@@ -30,7 +30,7 @@
         }
 
         .collapse-content .fa.fa-share-alt:hover {
-            color: #0d47a1 !important;
+            color: #f08080 !important;
         }
 
         .purple-border textarea {
@@ -143,15 +143,28 @@
       }
 
       body {
-        /*background: #76b852; !* fallback for old browsers *!*/
-        /*background: -webkit-linear-gradient(right, #76b852, #8DC26F);*/
-        /*background: -moz-linear-gradient(right, #76b852, #8DC26F);*/
-        /*background: -o-linear-gradient(right, #76b852, #8DC26F);*/
-        /*background: linear-gradient(to left, #76b852, #8DC26F);*/
+        background: #ffa07a; /* fallback for old browsers */
+        background: -webkit-linear-gradient(right, #ffa07a, #fafad2);
+        background: -moz-linear-gradient(right, #ffa07a, #fafad2);
+        background: -o-linear-gradient(right, #ffa07a, #fafad2);
+        background: linear-gradient(to left, #ffa07a, #fafad2);
         font-family: "Roboto", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+
+        .btn-outline-primary {
+            color: #000000;
+            background-color: transparent;
+            background-image: none;
+            border-color: #000000;
+        }
+
+        .btn-outline-primary:hover {
+            color: #fff;
+            background-color: #000000;
+            border-color: #000000;
+        }
 
     </style>
 
@@ -222,7 +235,7 @@
                 success: function (response) {
                     let poems = response['poems'];
                     for (let i = 0; i < poems.length; i++) {
-                        makeCard(poems[i]['poemTitle'], poems[i]['poem'], '20200501');
+                        makeCard(poems[i]['poemTitle'], poems[i]['poem'], '20200501', poems[i]['key']);
                     }
                 }
             })
@@ -234,7 +247,7 @@
                 type: "POST",
                 url: "/api/myPoem",
                 headers: {'token_give': $.cookie('mytoken')},
-                data: {poemTitle_give: $('#poemTitle').val(), poem_give: $('#poem').val(), poem_one_give: $('#customCheck').val()},
+                data: {poemTitle_give: $('#poemTitle').val(), poem_give: $('#poem').val(), poem_one_give: $('#customCheck').val(), key_give:$('#key').val()},
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert('수정되었습니다')
@@ -247,29 +260,30 @@
         }
 
         //쓴 시들 리스트로 합치기
-        function makeCard(title, content, date) {
+        function makeCard(title, content, date, key) {
             let tempHtml = `<tr>
                             <th scope="row"></th>
                             <td>${title}</td>
                             <td>${content}</td>
                             <td>${date}</td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" onclick="getPoem('${title}')">수정하기</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" onclick="getPoem('${key}')">수정하기</button>
                             </td>
                         </tr>`;
             console.log(tempHtml)
             $("#list").append(tempHtml);
         }
 
-        function getPoem(title){
+       function getPoem(key){
             $.ajax({
                 type: "GET",
                 url: "/api/myPoem",
                 headers: {'token_give': $.cookie('mytoken')},
-                data: {poemTitle_give: title},
+                data: {key_give: key},
                 success: function (response) {
                     $('#poemTitle').val(response.poem.poemTitle)
                     $('#poem').val(response.poem.poem)
+                    $('#key').val(response.poem.key)
                     if(response.poem.poemOne == 'Y'){
                          $("input:checkbox[id='customCheck']").prop("checked", true);
                     }
@@ -318,15 +332,16 @@
 </head>
 <body>
 ​
-<!--홈페이지 메뉴-->
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h3 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
+  <!--홈페이지 메뉴-->
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 body shadow-sm">
+    <h3 class="my-0 mr-md-auto " style="font-size: 2.5rem; font-weight: 700;"><a class="p-2 text-dark" href="/">Dear Poem</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/introduction">Dear Poem이란</a>
-        <a class="p-2 text-dark" href="/matching">오늘의 시</a>
-        <a class="p-2 text-dark" href="/messenger">편지함</a>
-        <a class="p-2 text-dark" href="/myPage">나의 시</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/introduction">Dear Poem이란</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/matching">오늘의 시</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/messenger">편지함</a>
+      <a class="p-2 text-dark" style="font-size: 1.3rem; font-weight: 600" href="/myPage">나의 시</a>
     </nav>
+
 
    <!--들어가기-->
     <a class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -341,7 +356,7 @@
 </div>
 ​
 <!--시 리스트 목록-->
-<table class="table table-striped">
+<table class="table table-striped" style="width: 90%; text-align: center; margin: auto;">
     <thead>
     <tr>
         <th scope="col">#</th>
@@ -357,7 +372,7 @@
 </table>
 ​
 <!--시 작성 버튼-->
-<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" id="btn-poem" onclick="openClose('insert')">시 작성하기</button>
+<button type="button" class="btn btn-outline-primary btn-sm waves-effect" id="btn-poem" style="text-align: center; margin: auto; font-size: 2rem; border-radius: 0.5rem;" onclick="openClose('insert')">시 작성하기</button>
 ​
 ​
 <!--시 제목 쓰는 부분-->
@@ -365,6 +380,7 @@
     <div class="form-group purple-border">
     <label for="poemTitle">제목</label>
     <textarea class="form-control rounded-0" id="poemTitle" rows="1" placeholder="제목을 작성해주세요"></textarea>
+        <input type="hidden" id="key"/>
     </div>
 ​
 <!--시 쓰는 부분-->
